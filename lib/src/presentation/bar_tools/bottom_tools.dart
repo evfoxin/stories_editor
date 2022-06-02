@@ -6,7 +6,6 @@ import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_n
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
-import 'package:stories_editor/src/presentation/utils/constants/item_type.dart';
 import 'package:stories_editor/src/presentation/utils/constants/text_animation_type.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 
@@ -140,9 +139,8 @@ class BottomTools extends StatelessWidget {
                                 itemNotifier.draggableWidget.isNotEmpty) {
                               for (var element
                                   in itemNotifier.draggableWidget) {
-                                if (element.type == ItemType.gif ||
-                                    element.animationType !=
-                                        TextAnimationType.none) {
+                                if (element.animationType !=
+                                    TextAnimationType.none) {
                                   setState(() {
                                     _createVideo = true;
                                   });

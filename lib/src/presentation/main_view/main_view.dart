@@ -42,9 +42,6 @@ class MainView extends StatefulWidget {
   /// editor custom font families package
   final bool? isCustomFontList;
 
-  /// giphy api key
-  final String giphyKey;
-
   /// editor custom color gradients
   final List<List<Color>>? gradientColors;
 
@@ -70,7 +67,6 @@ class MainView extends StatefulWidget {
   List<Color>? colorList;
   MainView(
       {Key? key,
-      required this.giphyKey,
       required this.onDone,
       this.middleBottomWidget,
       this.colorList,
@@ -117,7 +113,6 @@ class _MainViewState extends State<MainView> {
       var _control = Provider.of<ControlNotifier>(context, listen: false);
 
       /// initialize control variable provider
-      _control.giphyKey = widget.giphyKey;
       _control.middleBottomWidget = widget.middleBottomWidget;
       _control.isCustomFontList = widget.isCustomFontList ?? false;
       if (widget.gradientColors != null) {
@@ -605,14 +600,6 @@ class _MainViewState extends State<MainView> {
         _isDeletePosition = true;
         item.deletePosition = true;
       });
-    } else if (item.type == ItemType.gif &&
-        item.position.dy >= 0.21 &&
-        item.position.dx >= -0.25 &&
-        item.position.dx <= 0.25) {
-      setState(() {
-        _isDeletePosition = true;
-        item.deletePosition = true;
-      });
     } else {
       setState(() {
         _isDeletePosition = false;
@@ -629,13 +616,9 @@ class _MainViewState extends State<MainView> {
     _inAction = false;
     if (item.type == ItemType.image) {
     } else if (item.type == ItemType.text &&
-            item.position.dy >= 0.265 &&
-            item.position.dx >= -0.122 &&
-            item.position.dx <= 0.122 ||
-        item.type == ItemType.gif &&
-            item.position.dy >= 0.21 &&
-            item.position.dx >= -0.25 &&
-            item.position.dx <= 0.25) {
+        item.position.dy >= 0.265 &&
+        item.position.dx >= -0.122 &&
+        item.position.dx <= 0.122) {
       setState(() {
         _itemProvider.removeAt(_itemProvider.indexOf(item));
         HapticFeedback.heavyImpact();

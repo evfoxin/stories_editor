@@ -30,7 +30,7 @@ dependencies:
   gallery_media_picker:
     git:
       url: git@github.com:dronn1kDev/gallery_media_picker.git
-  modal_gif_picker: ^0.0.1
+  # modal_gif_picker: ^0.0.1
   # painting
   perfect_freehand: ^1.0.4
   # animations

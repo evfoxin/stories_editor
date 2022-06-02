@@ -5,7 +5,6 @@ import 'package:stories_editor/src/domain/providers/notifiers/control_provider.d
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
-import 'package:stories_editor/src/presentation/utils/constants/item_type.dart';
 import 'package:stories_editor/src/presentation/utils/constants/text_animation_type.dart';
 import 'package:stories_editor/src/presentation/utils/modal_sheets.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
@@ -83,8 +82,7 @@ class _TopToolsState extends State<TopTools> {
                       if (paintingNotifier.lines.isNotEmpty ||
                           itemNotifier.draggableWidget.isNotEmpty) {
                         for (var element in itemNotifier.draggableWidget) {
-                          if (element.type == ItemType.gif ||
-                              element.animationType != TextAnimationType.none) {
+                          if (element.animationType != TextAnimationType.none) {
                             setState(() {
                               _createVideo = true;
                             });
@@ -110,16 +108,6 @@ class _TopToolsState extends State<TopTools> {
                         _createVideo = false;
                       });
                     }),
-                ToolButton(
-                    child: const ImageIcon(
-                      AssetImage('assets/icons/stickers.png',
-                          package: 'stories_editor'),
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () => createGiphyItem(
-                        context: context, giphyKey: controlNotifier.giphyKey)),
                 ToolButton(
                     child: const ImageIcon(
                       AssetImage('assets/icons/draw.png',
