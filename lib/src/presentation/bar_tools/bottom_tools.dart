@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_media_picker/gallery_media_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:stories_editor/src/domain/models/editable_items.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
+import 'package:stories_editor/src/presentation/utils/constants/item_type.dart';
 import 'package:stories_editor/src/presentation/utils/constants/text_animation_type.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class BottomTools extends StatelessWidget {
   final GlobalKey contentKey;
@@ -54,17 +56,28 @@ class BottomTools extends StatelessWidget {
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 /// scroll to gridView page
                                 if (controlNotifier.mediaPath.isEmpty) {
-                                  scrollNotifier.pageController.animateToPage(1,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.ease);
+                                  final files =
+                                      await AssetPicker.pickAssets(context,
+                                          pickerConfig: const AssetPickerConfig(
+                                            maxAssets: 1,
+                                          ));
+                                  if (files != null && files.isNotEmpty) {
+                                    controlNotifier.mediaPath =
+                                        (await files.first.file)?.path ?? '';
+                                    itemNotifier.draggableWidget.insert(
+                                        0,
+                                        EditableItem()
+                                          ..type = ItemType.image
+                                          ..position = const Offset(0.0, 0));
+                                  }
                                 }
                               },
-                              child: const CoverThumbnail(
-                                thumbnailQuality: 150,
+                              child: const Icon(
+                                Icons.photo,
+                                color: Colors.white,
                               ),
                             ))
 
