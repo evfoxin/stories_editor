@@ -26,11 +26,6 @@ dependencies:
   image_gallery_saver: ^1.7.1
   # position
   align_positioned: ^3.0.0
-  # own packages
-  gallery_media_picker:
-    git:
-      url: git@github.com:dronn1kDev/gallery_media_picker.git
-  modal_gif_picker: ^0.0.1
   # painting
   perfect_freehand: ^1.0.4
   # animations
@@ -41,6 +36,7 @@ dependencies:
   permission_handler: ^9.2.0
   # toast
   fluttertoast: ^8.0.9
+  wechat_assets_picker: ^7.3.0
   
 dev_dependencies:
   flutter_test:
