@@ -99,6 +99,7 @@ class _TopToolsState extends State<TopTools> {
                               saveToGallery: true);
                           if (response) {
                             Fluttertoast.showToast(msg: 'Successfully saved');
+                            Navigator.pop(context);
                           } else {
                             Fluttertoast.showToast(msg: 'Error');
                           }
